@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "drf-viewset-profiler"
+version = "0.0.0"
+description = "Lib to profile all methods from a viewset line by line"
+license = "MIT"
+authors = [
+    "Frederico V Lima <frederico.vieira@gmail.com>"
+]
+repository = "https://github.com/fvlima/drf-viewset-profiler"
+homepage = "https://github.com/fvlima/drf-viewset-profiler"
+keywords = ["django rest framework", "drf", "drf viewset", "viewset line profiler", "profiler"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Profiler",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+]
+exclude = ["docs", "tests*"]
+include = ["*.rst", "*.py"]
+
+[tool.black]
+line-length = 110
+
+[tool.isort]
+line_length = 110
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+known_localfolder = "drf_viewset_profiler,test_drf_project"
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+default_section = "THIRDPARTY"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Cython = "^0.29.13"
+line_profiler = { git = "https://github.com/rkern/line_profiler" }
+
+[tool.poetry.dev-dependencies]
+black = { version = "^18.3-alpha.0", allows-prereleases = true }
+Django = "^2.0"
+djangorestframework = "^3.10.0"
+model-mommy = "^1.6.0"
+pre-commit = "^1.18.3"
+pytest = "^5.2.1"
+pytest-cov = "^2.8.1"
+pytest-django = "^3.5.1"
+python-status = "^1.0.1"
