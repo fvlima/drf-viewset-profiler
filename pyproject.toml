@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "drf-viewset-profiler"
-version = "0.0.0"
+version = "0.1.0"
 description = "Lib to profile all methods from a viewset line by line"
 license = "MIT"
 authors = [
@@ -23,7 +23,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 exclude = ["docs", "tests*"]
-include = ["*.rst", "*.py"]
+include = ["*.rst", "*txt", "*.md", "*.py"]
 
 [tool.black]
 line-length = 110
