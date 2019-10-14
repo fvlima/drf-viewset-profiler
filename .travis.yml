@@ -1,7 +1,20 @@
-sudo: false
 language: python
-python:
-  - "3.6"
-  - "3.7"
-install: pip install tox-travis poetry
-script: tox
+cache: pip
+
+matrix:
+  include:
+    - python: 3.6
+      dist: xenial
+      env: TOX_ENV=py36
+    - python: 3.7
+      dist: xenial
+      env: TOX_ENV=py37
+
+before_install:
+  - pip install --upgrade pip
+
+install:
+  - pip install tox poetry==1.0.0b2
+
+script:
+  - tox -e $TOX_ENV
