@@ -8,14 +8,7 @@ from drf_viewset_profiler.decorators import line_profiler_viewset
 
 
 class BaseTestView:
-    actions = {
-        "get": "list",  # noqa
-        "post": "create",
-        "get": "retrieve",  # noqa
-        "put": "update",
-        "patch": "partial_update",
-        "delete": "destroy",
-    }
+    actions = {"post": "create"}
 
     def __str__(self):
         pass
