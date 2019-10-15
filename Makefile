@@ -23,6 +23,7 @@ test: deps
 build: test
 	poetry build
 
+version = `cat CHANGES.rst | awk '/^[0-9]+\.[0-9]+(\.[0-9]+)?/' | head -n1`
 release: clean build
 	git rev-parse --abbrev-ref HEAD | grep '^master$$'
 	git tag $(version)
