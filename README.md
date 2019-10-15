@@ -45,16 +45,16 @@ DRF_VIEWSET_PROFILER = {
 
 There are two options to generate the profile information:
 
-DRF_VIEWSET_PROFILER
+#### DRF_VIEWSET_PROFILER
 - drf_viewset_profiler.output.FileOutput: generates the output in a txt file with the name of the profiled viewset
 - drf_viewset_profiler.output.StdOutput: generates the output in the console
 
 It's possible to customize by extending the BaseOuput class
 
-DEFAULT_OUTPUT_LOCATION
+#### DEFAULT_OUTPUT_LOCATION
 - the location to generate the output file with the name of the view that will profiled
 
-Output example
+#### Output example
 
 ```
 Total time: 1.7e-05 s
