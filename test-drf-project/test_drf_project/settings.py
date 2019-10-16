@@ -48,7 +48,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "test_drf_project.wsgi.application"
 
-
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -81,4 +80,5 @@ REST_FRAMEWORK = {
 DRF_VIEWSET_PROFILER = {
     "DEFAULT_OUTPUT_GENERATION_TYPE": "drf_viewset_profiler.output.StdOutput",
     "DEFAULT_OUTPUT_LOCATION": "",
+    "ENABLE_SERIALIZER_PROFILER": True,
 }
