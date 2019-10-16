@@ -3,11 +3,14 @@
 
 # drf-viewset-profiler
 
-Decorator to profile all methods from a viewset line by line. For all methods that were called during a request, an output
+Decorator to profile all methods from a viewset (and its serializer) line by line. For all methods that were called during a request, an output
 will be generated showing the number of hits, time (in seconds), lines and the content of each line of a method that was executed
 
 ## Installation
-Due to a problem with `line_profiler` installation, it's necessary to follow these instructions [1] to install, or just do `pip install Cython` and force to install this lib again
+
+`pip install drf-viewset-profiler`
+
+Note: due to a problem with `line_profiler` installation, it's necessary to follow these instructions [1] to install, or just do `pip install Cython` and force to install this lib again
 
 1 - https://github.com/rkern/line_profiler#installation
 
@@ -40,19 +43,21 @@ Make requests in this viewset to profile and measure the time in seconds wasted
 DRF_VIEWSET_PROFILER = {
     "DEFAULT_OUTPUT_GENERATION_TYPE": "drf_viewset_profiler.output.FileOutput",
     "DEFAULT_OUTPUT_LOCATION": "",
+    "ENABLE_SERIALIZER_PROFILER": True
 }
 ```
 
-There are two options to generate the profile information:
-
-#### DRF_VIEWSET_PROFILER
+#### DEFAULT_OUTPUT_GENERATION_TYPE
 - drf_viewset_profiler.output.FileOutput: generates the output in a txt file with the name of the profiled viewset
-- drf_viewset_profiler.output.StdOutput: generates the output in the console
+- drf_viewset_profiler.output.StdOutput: generates the output in the console (default)
 
 It's possible to customize by extending the BaseOuput class
 
 #### DEFAULT_OUTPUT_LOCATION
-- the location to generate the output file with the name of the view that will profiled
+- the location to generate the output file with the name of the view that will profiled (default is empty)
+
+#### ENABLE_SERIALIZER_PROFILER
+- profile the methods from the serializer vinculated with the viewset (default is True)
 
 #### Output example
 

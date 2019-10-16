@@ -17,13 +17,23 @@ def test_base_output_without_name(base_output):
 
 
 @pytest.mark.parametrize("filename", ("Name", "NAME", "nAme", "name", "name ", " name", " name "))
-def test_base_output_with_name(base_output, filename):
+def test_base_output_with_name(filename):
     assert BaseOutput(filename).file_name == "name"
 
 
-def test_base_output_get_file_name(base_output):
-    with pytest.raises(NotImplementedError):
-        assert base_output.get_file_name()
+@pytest.mark.parametrize(
+    "location,expected",
+    (
+        (None, "name"),
+        ("", "name"),
+        ("/some/", "/some/name"),
+        ("/some/another/", "/some/another/name"),
+        ("/some/another/location", "/some/another/location/name"),
+    ),
+)
+def test_base_output_get_file_location(location, expected):
+    with mock.patch("drf_viewset_profiler.output.BaseOutput.output_location", location):
+        assert BaseOutput("name").get_file_location() == expected
 
 
 def test_base_output_without_defined_stream():
@@ -72,14 +82,14 @@ def test_file_output(mock_open):
         stream.write("bar")
 
     assert mock_open.call_args_list[0] == mock.call("name", "w")
-    assert file_output.get_file_name() == "name"
+    assert file_output.get_file_location() == "name"
     assert file_output.stream.close.called is True
 
 
-@mock.patch("drf_viewset_profiler.output.output_default_location", "/some/other/location/")
+@mock.patch("drf_viewset_profiler.output.FileOutput.output_location", "/some/location/")
 @mock.patch("builtins.open")
 def test_file_output_with_another_output_location(mock_open):
     file_output = FileOutput("name")
 
-    assert file_output.get_file_name() == "/some/other/location/name"
-    assert mock_open.call_args_list[0] == mock.call("/some/other/location/name", "w")
+    assert file_output.get_file_location() == "/some/location/name"
+    assert mock_open.call_args_list[0] == mock.call("/some/location/name", "w")

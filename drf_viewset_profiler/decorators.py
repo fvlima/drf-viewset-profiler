@@ -1,4 +1,6 @@
-from .utils import create_line_profile
+from .utils import create_line_profile, get_value_from_config
+
+enable_serializer_profiler = get_value_from_config("ENABLE_SERIALIZER_PROFILER", True)
 
 
 def line_profiler_viewset(viewset):
@@ -27,8 +29,12 @@ def line_profiler_viewset(viewset):
     class LineProfilerViewSet(viewset):
         def initialize_request(self, request, *args, **kwargs):
             request = super().initialize_request(request, *args, **kwargs)
-            line_profiler = create_line_profile(viewset)
-            request.line_profiler = line_profiler
+            args = [viewset]
+
+            if enable_serializer_profiler and hasattr(viewset, "get_serializer_class"):
+                args.append(viewset.get_serializer_class(self))
+
+            request.line_profiler = create_line_profile(*args)
             return request
 
     LineProfilerViewSet.__name__ = viewset.__name__
