@@ -8,7 +8,10 @@ matrix:
       env: TOX_ENV=py36
     - python: 3.7
       dist: xenial
-      env: TOX_ENV="py37,lint"
+      env: TOX_ENV=py37
+    - python: 3.8
+      dist: xenial
+      env: TOX_ENV="py38,lint"
 
 before_install:
   - pip install --upgrade pip
