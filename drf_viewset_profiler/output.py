@@ -1,17 +1,13 @@
 import sys
 
-from django.conf import settings
 from django.utils.module_loading import import_string
 
-drf_viewset_config = getattr(settings, "DRF_VIEWSET_PROFILER", {})
-output_generation_type = drf_viewset_config.get(
-    "DEFAULT_OUTPUT_GENERATION_TYPE", "drf_viewset_profiler.output.StdOutput"
-)
-output_default_location = drf_viewset_config.get("DEFAULT_OUTPUT_LOCATION", "")
+from .utils import get_value_from_config
 
 
 class BaseOutput:
     stream = None
+    output_location = get_value_from_config("DEFAULT_OUTPUT_LOCATION", "")
 
     def __init__(self, file_name=None):
         self.file_name = file_name.strip().lower() if file_name else ""
@@ -28,8 +24,13 @@ class BaseOutput:
     def writelines(self, data):
         self.stream.writelines(data)
 
-    def get_file_name(self):
-        raise NotImplementedError()
+    def get_file_location(self):
+        output_location = self.output_location
+        if output_location is None:
+            output_location = ""
+        if output_location and not output_location.endswith("/"):
+            output_location = output_location + "/"
+        return output_location + self.file_name
 
 
 class StdOutput(BaseOutput):
@@ -42,10 +43,10 @@ class StdOutput(BaseOutput):
 class FileOutput(BaseOutput):
     def __init__(self, file_name):
         super().__init__(file_name)
-        self.stream = open(self.get_file_name(), "w")
-
-    def get_file_name(self):
-        return output_default_location + self.file_name
+        self.stream = open(self.get_file_location(), "w")
 
 
-output_writer = import_string(output_generation_type)
+_output_generation_type = get_value_from_config(
+    "DEFAULT_OUTPUT_GENERATION_TYPE", "drf_viewset_profiler.output.StdOutput"
+)
+output_writer = import_string(_output_generation_type)
