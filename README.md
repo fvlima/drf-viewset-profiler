@@ -10,7 +10,7 @@ will be generated showing the number of hits, time (in seconds), lines and the c
 
 `pip install drf-viewset-profiler`
 
-Note: due to a problem with `line_profiler` installation, it's necessary to follow these instructions [1] to install, or just do: 
+Note: due to a problem with `line_profiler` installation, it's necessary to follow these instructions [1] to install, or just do:
 
 - `pip install Cython`
 - `pip install git+https://github.com/rkern/line_profiler#egg=line_profiler`
