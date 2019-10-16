@@ -8,12 +8,8 @@ from drf_viewset_profiler import line_profiler_viewset
 
 @line_profiler_viewset
 class TestViewSet(viewsets.ViewSet):
-    serializer_class = TestSerializer
-
     def list(self, request):
-        serializer = TestSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response([], status=status.HTTP_200_OK)
 
     def create(self, request):
         serializer = TestSerializer(data=request.data)
@@ -21,9 +17,7 @@ class TestViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def retrieve(self, request, pk=None):
-        serializer = TestSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({}, status=status.HTTP_200_OK)
 
     def update(self, request, pk=None):
         serializer = TestSerializer(data=request.data)
@@ -36,9 +30,7 @@ class TestViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, pk=None):
-        serializer = TestSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 
 @line_profiler_viewset
