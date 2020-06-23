@@ -22,7 +22,7 @@ def test_line_profiler_viewset(api_client, url, method, data, expected_code, moc
     response = method(url, data=data) if data else method(url)
 
     assert response.status_code == expected_code
-    assert mock_output_writer.called is True
+    assert mock_output_writer.flush.called is True
 
 
 def test_line_profiler_model_viewset_get(api_client, mock_output_writer):
@@ -32,7 +32,7 @@ def test_line_profiler_model_viewset_get(api_client, mock_output_writer):
 
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 1
-    assert mock_output_writer.called is True
+    assert mock_output_writer.flush.called is True
 
 
 def test_line_profiler_model_viewset_post(api_client, mock_output_writer):
@@ -41,7 +41,7 @@ def test_line_profiler_model_viewset_post(api_client, mock_output_writer):
 
     assert response.status_code == status.HTTP_201_CREATED
     assert response.json() == {"name": "John Doe"}
-    assert mock_output_writer.called is True
+    assert mock_output_writer.flush.called is True
 
 
 @pytest.mark.parametrize("method", ("put", "patch"))
@@ -53,7 +53,7 @@ def test_line_profiler_model_viewset_update(api_client, method, mock_output_writ
 
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {"name": "John Doe"}
-    assert mock_output_writer.called is True
+    assert mock_output_writer.flush.called is True
 
 
 def test_line_profiler_model_viewset_delete(api_client, mock_output_writer):
@@ -62,7 +62,7 @@ def test_line_profiler_model_viewset_delete(api_client, mock_output_writer):
     response = api_client.delete(url, data={"name": "John Doe"})
 
     assert response.status_code == status.HTTP_204_NO_CONTENT
-    assert mock_output_writer.called is True
+    assert mock_output_writer.flush.called is True
 
 
 @override_settings(
@@ -78,4 +78,4 @@ def test_line_profiler_viewset_without_middleware_config(api_client, mock_output
     response = api_client.get(url)
 
     assert response.status_code == status.HTTP_200_OK
-    assert mock_output_writer.called is False
+    assert mock_output_writer.flush.called is False
