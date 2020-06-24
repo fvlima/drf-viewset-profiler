@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "drf-viewset-profiler"
-version = "0.2.0"
+version = "0.3.0"
 description = "Lib to profile all methods from a viewset line by line"
 license = "MIT"
 readme = 'README.md'
@@ -41,15 +41,20 @@ default_section = "THIRDPARTY"
 [tool.poetry.dependencies]
 python = "^3.6"
 Cython = "^0.29"
-line_profiler = { git = "https://github.com/rkern/line_profiler" }
+line_profiler = "^3.0.2"
 
 [tool.poetry.dev-dependencies]
 black = { version = "^19", allows-prereleases = true }
 Django = "^2.0"
 djangorestframework = "^3.10"
+ipython = "^7.15.0"
 model-mommy = "^1.6"
 pre-commit = "^1.18"
 pytest = "^5.2"
 pytest-cov = "^2.8"
 pytest-django = "^3.5"
 python-status = "^1.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
