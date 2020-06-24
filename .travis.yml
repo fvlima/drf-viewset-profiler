@@ -17,7 +17,7 @@ before_install:
   - pip install --upgrade pip
 
 install:
-  - pip install tox poetry==1.0.0b2
+  - pip install tox poetry
 
 script:
   - tox -e $TOX_ENV

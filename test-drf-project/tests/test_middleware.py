@@ -2,7 +2,7 @@ def test_process_response_without_renderer_context(mock_line_profiler_viewset_mi
     response = mock_line_profiler_viewset_middleware.process_response({}, {})
 
     assert response == {}
-    assert mock_output_writer.called is False
+    assert mock_output_writer.flush.called is False
 
 
 def test_process_response_without_line_profiler(
@@ -12,7 +12,7 @@ def test_process_response_without_line_profiler(
     response = mock_line_profiler_viewset_middleware.process_response({}, mock_http_response)
 
     assert mock_http_response == response
-    assert mock_output_writer.called is False
+    assert mock_output_writer.flush.called is False
 
 
 def test_process_response_writing_output(
@@ -21,4 +21,5 @@ def test_process_response_writing_output(
     response = mock_line_profiler_viewset_middleware.process_response({}, mock_http_response)
 
     assert mock_http_response == response
-    assert mock_output_writer.called is True
+    assert mock_http_response.renderer_context["request"].line_profiler.print_stats.called is True
+    assert mock_output_writer.flush.called is True

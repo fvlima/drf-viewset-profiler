@@ -32,7 +32,7 @@ def mock_http_response(mock_http_request):
 @pytest.fixture
 def mock_output_writer(monkeypatch):
     mock_output_writer_ = mock.Mock()
-    monkeypatch.setattr("drf_viewset_profiler.middleware.output_writer", mock_output_writer_)
+    monkeypatch.setattr("drf_viewset_profiler.middleware.output_writer.stream", mock_output_writer_)
     return mock_output_writer_
 
 
