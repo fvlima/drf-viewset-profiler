@@ -1,3 +1,9 @@
+0.3.0
+~~~~~
+* Improve tests
+* Add new line profiler as dependency
+* Update install section (now, just pip install drf-viewset-profiler)
+
 0.2.0
 ~~~~~
 
