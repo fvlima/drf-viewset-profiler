@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "drf-viewset-profiler"
-version = "0.3.0"
+version = "0.4.0"
 description = "Lib to profile all methods from a viewset line by line"
 license = "MIT"
 readme = 'README.md'
@@ -16,14 +16,20 @@ classifiers = [
     "Topic :: Software Development :: Testing",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: Implementation :: CPython",
     "Operating System :: OS Independent",
     "License :: OSI Approved :: MIT License",
 ]
 exclude = ["docs", "tests*"]
 include = ["*.rst", "*txt", "*.md", "*.py"]
+
+[tool.poetry.group.dev.dependencies]
+model-bakery = "^1.17.0"
 
 [tool.black]
 line-length = 110
@@ -39,20 +45,20 @@ sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
 default_section = "THIRDPARTY"
 
 [tool.poetry.dependencies]
-python = "^3.6"
-Cython = "^0.29"
-line_profiler = "^3.0.2"
+python = "^3.8"
+Cython = "^3.0"
+line_profiler = "^4.0"
 
 [tool.poetry.dev-dependencies]
-black = { version = "^19", allows-prereleases = true }
-Django = "^2.0"
-djangorestframework = "^3.10"
-ipython = "^7.15.0"
-model-mommy = "^1.6"
-pre-commit = "^1.18"
-pytest = "^5.2"
-pytest-cov = "^2.8"
-pytest-django = "^3.5"
+black = "^23.0"
+Django = "^3.2"
+djangorestframework = "^3.14"
+ipython = "^8.0"
+model-bakery = "^1.17"
+pre-commit = "==3.2.2"
+pytest = "^7.4"
+pytest-cov = "^4.0"
+pytest-django = "^4.7"
 python-status = "^1.0"
 
 [build-system]

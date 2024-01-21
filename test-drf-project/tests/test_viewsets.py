@@ -2,7 +2,7 @@ import pytest
 import status
 from django.test import override_settings
 from django.urls import reverse
-from model_mommy import mommy
+from model_bakery import baker
 
 pytestmark = pytest.mark.django_db
 
@@ -26,7 +26,7 @@ def test_line_profiler_viewset(api_client, url, method, data, expected_code, moc
 
 
 def test_line_profiler_model_viewset_get(api_client, mock_output_writer):
-    mommy.make("testapp.TestModel")
+    baker.make("testapp.TestModel")
     url = reverse("testapp:test-model-viewset-list")
     response = api_client.get(url)
 
@@ -46,7 +46,7 @@ def test_line_profiler_model_viewset_post(api_client, mock_output_writer):
 
 @pytest.mark.parametrize("method", ("put", "patch"))
 def test_line_profiler_model_viewset_update(api_client, method, mock_output_writer):
-    model = mommy.make("testapp.TestModel")
+    model = baker.make("testapp.TestModel")
     url = reverse("testapp:test-model-viewset-detail", args=[model.pk])
     method = getattr(api_client, method)
     response = method(url, data={"name": "John Doe"})
@@ -57,7 +57,7 @@ def test_line_profiler_model_viewset_update(api_client, method, mock_output_writ
 
 
 def test_line_profiler_model_viewset_delete(api_client, mock_output_writer):
-    model = mommy.make("testapp.TestModel")
+    model = baker.make("testapp.TestModel")
     url = reverse("testapp:test-model-viewset-detail", args=[model.pk])
     response = api_client.delete(url, data={"name": "John Doe"})
 

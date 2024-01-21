@@ -38,4 +38,4 @@ def mock_output_writer(monkeypatch):
 
 @pytest.fixture
 def mock_line_profiler_viewset_middleware():
-    return LineProfilerViewSetMiddleware()
+    return LineProfilerViewSetMiddleware(get_response=mock.Mock())
