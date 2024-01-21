@@ -1,3 +1,8 @@
+0.4.0
+~~~~~
+* Update project dependencies
+* Update django, django-rest-framework, and python supported versions
+
 0.3.0
 ~~~~~
 * Improve tests

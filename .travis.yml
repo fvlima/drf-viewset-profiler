@@ -3,15 +3,33 @@ cache: pip
 
 matrix:
   include:
-    - python: 3.6
-      dist: xenial
-      env: TOX_ENV=py36
-    - python: 3.7
-      dist: xenial
-      env: TOX_ENV=py37
     - python: 3.8
-      dist: xenial
-      env: TOX_ENV="py38,lint"
+      dist: focal
+      env: TOX_ENV="py38-django32"
+    - python: 3.8
+      dist: focal
+      env: TOX_ENV="py38-django42"
+    - python: 3.9
+      dist: focal
+      env: TOX_ENV="py39-django32"
+    - python: 3.9
+      dist: focal
+      env: TOX_ENV="py39-django42"
+    - python: 3.10
+      dist: focal
+      env: TOX_ENV="py310-django32"
+    - python: 3.10
+      dist: focal
+      env: TOX_ENV="py310-django42"
+    - python: 3.11
+      dist: focal
+      env: TOX_ENV="py311-django32,lint"
+    - python: 3.11
+      dist: focal
+      env: TOX_ENV="py311-django42,lint"
+    - python: 3.12
+      dist: focal
+      env: TOX_ENV="py312-django42,lint"
 
 before_install:
   - pip install --upgrade pip
